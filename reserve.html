@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Reserve a Table</title>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+
+    <h1>Nom Nom Nom Restaurant</h1>
+    <br>
+    <h2>Make a Reservation</h2>
+    <br>
+    <button id="btnTable"><a href="/tables">View Tables</a></button>
+    <button id="btnHome"><a href="/">Home</a></button>
+    <br>
+    <h3>Table Reservation</h3>
+    <form method="POST" role="form">
+        <div>
+            <label>Name</label>
+            <input type="text" id="name"> 
+        </div>   
+        <div>
+            <label>Phone Number</label>
+            <input type="text" id="phone"> 
+        </div>        
+        <div>
+            <label>Email</label>
+            <input type="text" id="email"> 
+        </div>   
+        <div>
+            <label>Unique ID</label>
+            <input type="text" id="ID"> 
+        </div>       
+    </form>
+    <button type="submit" id="submit">Submit</button>
+
+<script type="text/javascript">
+    $("#submit").on("click", function(event) {
+        event.preventDefault();
+        let newTable = {
+            customerName: $("#name").val().trim(),
+            phoneNumber: $("#phone").val().trim(),
+            customerEmail: $("#email").val().trim(),     
+            customerID: $("#ID").val().trim()     
+        }
+
+        $.post("/api/new", newTable).then(function(data) {
+            console.log(data);
+            alert("Your reservation has been submitted!");
+        })
+    });
+</script>
+
+</body>
+</html>
